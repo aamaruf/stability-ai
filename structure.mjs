@@ -4,11 +4,11 @@ import fs from "fs";
 import {generateRandomFileName} from "./utils.mjs"
 const payload = {
     image: fs.createReadStream("./cat-statue.png"),
-    prompt: "visualize a modern luxury bathroom interior from a front-view perspective, features an elegant white marble sink, accompanied by a matte gold faucet, a wall-mounted toilet in a sleek white ceramic enhances the room's luxurious, include a large mirror with a gold filigree frame that reflects the opulent decor of the room, the floor and walls are finished in large, white and grey veined marble tiles, adding to the lavish aesthetic, soft LED lighting is integrated into the ceiling and behind the mirror, casting a warm, glowing light across the space, creating a serene and opulent atmosphere, ensure the image captures the interplay of warm artificial light and natural daylight, emphasizing the polished surfaces and elegant lines typical of a luxury bathroom design --ar 9:16 --style raw",
+    prompt: "retro-inspired lounge with shaggy rugs, vintage stereo, mid-century furniture, using a color palette of teal, orange, brown, in a clean, minimalist illustration style --ar 9:16 --v 6.1",
     control_strength: 0.6,
     output_format: "webp",
 };
-console.log("🚀 ~ payload:", payload)
+console.log("🚀 ~ payload.prompt:", payload.prompt)
 
 const response = await axios.postForm(
     `https://api.stability.ai/v2beta/stable-image/control/structure`,
@@ -24,7 +24,7 @@ const response = await axios.postForm(
 );
 
 if (response.status === 200) {
-    const fileName = generateRandomFileName('webp')
+    const fileName = generateRandomFileName(payload.output_format)
     fs.writeFileSync(fileName, Buffer.from(response.data));
 } else {
     throw new Error(`${response.status}: ${response.data.toString()}`);
