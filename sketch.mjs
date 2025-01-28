@@ -5,7 +5,7 @@ import { API_BASE_URL, API_KEY, generateRandomFileName } from "./utils.mjs";
 
 const payload = {
     image: fs.createReadStream("./sketch3.jpeg"),
-    prompt: "Convert this sketch into a realistic modern interior design with soft lighting, marble flooring.",
+    prompt: "Convert this sketch into a realistic moder interior design with soft lighting, marble flooring.",
     control_strength: 0.8,
     output_format: "webp",
 };
